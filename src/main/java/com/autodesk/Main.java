@@ -41,21 +41,15 @@ import static java.lang.System.*;
 /**
  * Created by Jonathan Miao on 6/17/2015.
  */
-class Credentials
-{
-    //get your ConsumerKey/ConsumerSecret at http://developer.autodesk.com
-    public static String ConsumerKey = "H94Mg0UhWGxZ46PmAto4l8EyT4pGX9CL";
-    public static String ConsumerSecret = "og0sPGV00Irruo3j";
-}
 
 public class Main {
 
     public static void main(String[] args) throws IOException, ParseException, InterruptedException {
 
-        final String token = getToken(Credentials.ConsumerKey, Credentials.ConsumerSecret);
+        final String token = getToken("you consumer key", "you consumer secret");
 
         ODataClient client = ODataClientFactory.getClient();
-        String serviceRoot = "https://developer-dev.api.autodesk.com/autocad.io/us-east/v2/";
+        String serviceRoot = "https://developer.api.autodesk.com/autocad.io/us-east/v2/";
 
         ClientEntity act = getActivity(client, serviceRoot, token);
 
@@ -64,7 +58,7 @@ public class Main {
 
     //obtain authorization token
     static String getToken(final String consumerKey, final String consumerSecret) throws IOException, ParseException {
-        final String url = "https://developer-dev.api.autodesk.com/authentication/v1/authenticate";
+        final String url = "https://developer.api.autodesk.com/authentication/v1/authenticate";
         final HttpPost post = new HttpPost(url);
         List<NameValuePair> form = new ArrayList<NameValuePair>();
         form.add(new BasicNameValuePair("client_id", consumerKey));
